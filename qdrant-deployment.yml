@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: qdrant-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: db
+  template:
+    metadata:
+      labels:
+        app: db
+    spec:
+      containers:
+      - name: db
+        image: qdrant/qdrant:latest
+        ports:
+        - containerPort: 6333
+#        env:
+#        - name: MONGO_INITDB_ROOT_USERNAME
+#          value: "root"
+#        - name: MONGO_INITDB_ROOT_PASSWORD
+#          value: "pass"

@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: flask-deployment
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: app
+  template:
+    metadata:
+      labels:
+        app: app
+    spec:
+      containers:
+      - name: app
+        image: saadriaz999/devops-myapp:latest
+        ports:
+        - containerPort: 5000
+        env:
+        - name: QDRANT_HOST
+          value: qdrant-service
+        - name: QDRANT_PORT
+          value: "27017"
+        - name: FLASK_ENV
+          value: "production"
